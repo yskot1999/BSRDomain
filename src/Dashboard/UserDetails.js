@@ -154,7 +154,7 @@ class UserDetails extends React.Component {
            const state=snapshot.val();
            for(let i in state){
               if(i===n){
-                alert("appointment already exists.Select another time slot")
+              
                 m=1;
                 console.log(m)
               }
@@ -162,6 +162,9 @@ class UserDetails extends React.Component {
        })
        setTimeout(()=>{
        console.log(m);
+       if(m===1){
+        alert("appointment already exists.Select another time slot");
+       }
        if(m===0){
 
         newState.push({

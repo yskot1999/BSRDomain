@@ -83,7 +83,7 @@ newstate.push({
        // this.state.added.push(item)
       // narr.push(obj)
       var d=obj[0].appt.split("/").join("-");
-      firebase.database().ref('/domainexpert/9867095775/calls/'+d).set(obj[0]);
+      firebase.database().ref('/domainexpert/'+this.props.location.state.mobo+'/calls/'+d).set(obj[0]);
       
        //console.log(this.state.added)
       

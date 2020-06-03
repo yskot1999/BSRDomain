@@ -52,10 +52,11 @@ export default class App extends React.Component {
         },
       });
       componentDidMount(){
-        const db1=firebase.database().ref('/domain')
+        
         const db=firebase.database().ref('/domainexpert');
         db.on('value',(snapshot)=>{
             const state=snapshot.val();
+            console.log(state)
            var newstate=[];
             for(let i in state){
 newstate.push({
@@ -76,7 +77,10 @@ newstate.push({
         console.log(this.state.data.length);
     }
     render(){
-        console.log(this.state.data.length);
+        var db=firebase.database().ref('/users/9561275394');
+        db.on('value',(snapshot)=>{
+            console.log(snapshot.val())
+        })
         const classes = this.makeStyles;
         if(this.state.val)
         {
@@ -149,7 +153,7 @@ newstate.push({
                         <Button
                             id="submit"
                             variant="contained"
-                            color="#D0DB4E"
+                         
                             className={classes.submit}
                             style={{marginTop:"2vh",width:"40%",marginLeft:"30%",backgroundColor:"#D0DB4E"}}
                             onClick={() => {
