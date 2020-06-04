@@ -9,6 +9,16 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import 'date-fns';
+import DatePic from './DatePic'
+
 
 class UserDetails extends React.Component {
     constructor(props) {
@@ -23,12 +33,17 @@ class UserDetails extends React.Component {
             visibile:"hidden",
             changed:false,
             alertdisable:"visible",
-            alertdisable2:"hidden"
+            alertdisable2:"hidden",
+            selectother:"hidden",
+            dateheight:"0vh"
         }
         this.addcalls=this.addcalls.bind(this);
+        this.noclicked=this.noclicked.bind(this);
         //this.change=this.change.bind(this);
+        this.handleDateChange=this.handleDateChange.bind(this);
     }
    
+    
     makeStyles = (theme) => ({
         root: {
             display: 'flex',
@@ -50,6 +65,9 @@ class UserDetails extends React.Component {
               'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
           },
     });
+ handleDateChange = (date) => {
+        console.log(date);
+      };
     /*makeStyles=(theme) => ({
         root: {
           display: 'flex',
@@ -63,6 +81,7 @@ class UserDetails extends React.Component {
           height: 450,
         },
       })*/
+    
     componentWillReceiveProps(nextProps) {
         //this.store(this.props.userdetails['name'],this.props.userdetails['mobilenumber']);
         var nam = nextProps.userdetails['name'];
@@ -131,7 +150,8 @@ class UserDetails extends React.Component {
                 name1: nam,
                 mobilenum: num,
                 alertdisable:"visible",
-                alertdisable2:"hidden"
+                alertdisable2:"hidden",
+               
             })
         }, 3500)
 
@@ -190,7 +210,8 @@ class UserDetails extends React.Component {
             })
             console.log('/users/'+this.props.userdetails['mobilenumber']+'/'+key);
             firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/'+key).update(keyvalue[0]);
-             this.setState({
+            alert("appointment booked");
+            this.setState({
                  alertdisable:"hidden",
                  alertdisable2:"visible"
      
@@ -198,7 +219,14 @@ class UserDetails extends React.Component {
          }},3500)
        
     }
+    noclicked(){
+        this.setState({
+            selectother:"visible",
+            dateheight:"20%"
+        })
+    }
     render() {
+        //const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
         const classes = this.makeStyles;
         console.log(this.state.imgdetails);
         console.log(this.state.audiodetails);
@@ -303,7 +331,7 @@ class UserDetails extends React.Component {
                             <DoneIcon  style={{ color: "white" }} />
                         </Button>
                        
-                        <Button style={{ marginLeft: "0%", width: "7%", height: "100%", backgroundColor: "inherit", border: "0px" }}>
+                        <Button onClick={this.noclicked} style={{ marginLeft: "0%", width: "7%", height: "100%", backgroundColor: "inherit", border: "0px" }}>
                             <ClearIcon style={{ color: "white" }} />
                         </Button>
                     </div>
@@ -317,6 +345,9 @@ class UserDetails extends React.Component {
                     <div id="tex" style={{width:"70%",marginLeft:"15%",marginTop:"5%",display:"flex",flexDirection:"column",height:this.state.height,visibility:this.state.visibile}} >
                         <textarea color="white" style={{width:"99%",height:"20vh",marginLeft:"0"}} ></textarea>    
                         <Button style={{marginTop:"3.5vh",backgroundColor:"#D0DB4E",marginLeft:"37.5%",fontSize:"20px",width:"20%",height:"6vh",color:"white"}}>सेव करा</Button>
+                    </div>
+                    <div  style={{height:this.state.dateheight,width:"90%",visibility:this.state.selectother}}>
+                                <DatePic/>
                     </div>
                     <div style={{ height: "7vh",textAlign:"left" }}><h2 style={{marginLeft:"5%",marginTop:"1vh"}} >फोटो</h2></div>
                     <div style={{width:"90%",marginLeft:"5%",backgroundColor:"grey",height:".2vh"}} ></div>
