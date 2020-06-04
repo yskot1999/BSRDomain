@@ -44,7 +44,6 @@ export default function MenuAppBar(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   return (
     <div className={classes.root}>
       

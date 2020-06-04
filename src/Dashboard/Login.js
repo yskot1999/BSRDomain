@@ -2,7 +2,7 @@
 //import ReactDOM from "react-dom";
 //import { Container, Row, Col, Jumbotron, Card, CardBody } from "reactstrap";
 import {Link,Route, Redirect} from 'react-router-dom';
-//import LoginForm from "./Dashboard/LoginForm";
+//import LoginForm from "./Dashboard/LoginForm";    
 import React from 'react';
 import firebase from './firebase.js';
 import Avatar from '@material-ui/core/Avatar';
@@ -84,6 +84,7 @@ newstate.push({
         const classes = this.makeStyles;
         if(this.state.val)
         {
+            document.cookie="username=" + this.state.name.toString() +  " " +  "mob=" + this.state.mobo.toString();
             return(
                 <Redirect to={{pathname: "/Dashboardlayout", state: {name:this.state.name,mobo:this.state.mobo}}}/>
         )

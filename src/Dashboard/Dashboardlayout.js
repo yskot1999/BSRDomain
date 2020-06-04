@@ -74,22 +74,51 @@ newstate.push({
         });
     }
     calls=(obj)=>{
-        console.log(obj[0])
-
+        console.log(obj[0]);
+        
             //id= parseInt(id)
         //const item4= this.state.arr[id-1]
      //  console.log(item)
       //  const narr = [...this.state.callslist]
        // this.state.added.push(item)
       // narr.push(obj)
+      var x=document.cookie;
+      console.log(x);
+      var t=[];
+      t=x.split(";");
+      console.log(t);
+      var tr=[];
+      tr=t[3].split(" ");
+      console.log(tr);
+      var user=[];
+      user=tr[1].split("=");
+      var mob=[];
+      mob=tr[2].split("=");
       var d=obj[0].appt.split("/").join("-");
-      firebase.database().ref('/domainexpert/'+this.props.location.state.mobo+'/calls/'+d).set(obj[0]);
+      firebase.database().ref('/domainexpert/'+mob[1].toString()+'/calls/'+d).set(obj[0]);
       
        //console.log(this.state.added)
       
 
     }
     render(){
+        var x=document.cookie;
+        console.log(x);
+        var t=[];
+        t=x.split(";");
+        console.log(t);
+        var tr=[];
+        tr=t[3].split(" ");
+        console.log(tr);
+        var user=[];
+        user=tr[1].split("=");
+        var mob=[];
+        mob=tr[2].split("=");
+        //var x=document.cookie;
+
+        console.log(mob[1]);
+        /*console.log(tr[1]);
+        console.log(tr[2]);*/
         return(
             <div style={{height:"100vh",width:"100vw"}}>
                 <div style={{height:"10vh",width:"100vw"}}>
