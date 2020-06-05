@@ -131,8 +131,8 @@ var x=document.cookie;
                         <div style={{marginTop:"-1%",marginLeft:"5%"}}><h3>{mob[1].toString()}</h3></div>
                         <div style={{marginTop:"0%",marginLeft:"5%",height:".2%",width:"90%",backgroundColor:"grey"}}></div>
                         <div style={{height:"10%",width:"90%",marginLeft:"5%",marginTop:"2%",display:"flex",flexDirection:"row"}}>
-                            <div style={{height:"80%",width:"30%",backgroundColor:"#d0db4e",marginTop:"",marginLeft:"15%"}}><div style={{marginTop:"2vh",textAlign:"center"}}>Pending Cases:{this.state.pendingcases}</div></div>
-                            <div style={{height:"80%",width:"30%",backgroundColor:"#d0db4e",marginTop:"",marginLeft:"10%"}}><div style={{marginTop:"2vh",textAlign:"center"}}>Approved Cases:{this.state.approvedcases}</div></div>
+                            <div style={{height:"80%",width:"25%",borderWidth:"2px",borderStyle:"solid",borderColor:"#d0db4e",marginTop:"",marginLeft:"20%",borderRadius:"10px"}}><div style={{marginTop:"2vh",textAlign:"center"}}>Pending Cases:{this.state.pendingcases}</div></div>
+                            <div style={{height:"80%",width:"25%",borderWidth:"2px",borderStyle:"solid",borderColor:"#d0db4e",marginTop:"",marginLeft:"10%",borderRadius:"10px"}}><div style={{marginTop:"2vh",textAlign:"center"}}>Approved Cases:{this.state.approvedcases}</div></div>
                         </div>
                         <div style={{width:"60%",marginLeft:"20%"}} >
                         <Data result={this.state.data} />

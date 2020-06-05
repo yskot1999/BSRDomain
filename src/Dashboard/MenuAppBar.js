@@ -13,7 +13,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom';
-
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -41,9 +42,7 @@ export default function MenuAppBar(props) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  
   return (
     <div className={classes.root}>
       
@@ -51,7 +50,7 @@ export default function MenuAppBar(props) {
         <Toolbar>
         <Link to={{pathname:'/Dashboardlayout',state:{name:props.name,mobilenumber:props.mobilenumber}}} style={{color:"white"}}>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
+            <DashboardIcon />
           </IconButton>
          </Link>
           <Typography variant="h6" className={classes.title}>
@@ -71,7 +70,7 @@ export default function MenuAppBar(props) {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <AccountCircle />
+                <ExitToAppIcon />
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -86,10 +85,10 @@ export default function MenuAppBar(props) {
                   horizontal: 'right',
                 }}
                 open={open}
-                onClose={handleClose}
+                
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+             <Link to={{pathname:"/"}} style={{color:"black"}}>   <MenuItem>Logout</MenuItem></Link>
+                
               </Menu>
             </div>
           )}

@@ -1,3 +1,4 @@
+
 import React from 'react'
 import firebase from './firebase.js'
 import DoneIcon from '@material-ui/icons/Done';
@@ -7,10 +8,10 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
+//import Paper from '@material-ui/core/Paper';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
+//import Grid from '@material-ui/core/Grid';
+//import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -35,7 +36,9 @@ class UserDetails extends React.Component {
             alertdisable:"visible",
             alertdisable2:"hidden",
             selectother:"hidden",
-            dateheight:"0vh"
+            dateheight:"0vh",
+            butheight:"0vh",
+            butvis:"hidden"
         }
         this.addcalls=this.addcalls.bind(this);
         this.noclicked=this.noclicked.bind(this);
@@ -222,8 +225,52 @@ class UserDetails extends React.Component {
     noclicked(){
         this.setState({
             selectother:"visible",
-            dateheight:"20%"
+            dateheight:"20%",
+            butheight:"6vh",
+            butvis:"visible"
         })
+    }
+    setNew=(n)=>{
+        var x=document.cookie;
+        console.log(x);
+        var t=[];
+        t=x.split(";");
+        console.log(t);
+        console.log(t[4]);
+        t[4]=t[4].substring(4,t[4].length)
+        console.log(t[4]);
+        var key=""
+var db=firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/appointment');
+db.on('value',(snapshot)=>{
+const state=snapshot.val();
+for(let i in state){
+    if(state[i]===n){
+key=i;
+    }
+}
+
+})
+var keyvalue=[];
+keyvalue.push({
+  confirmation:"confirmed"  ,
+  timing:t[4]
+})
+var timin=[];
+timin.push({
+    key:t[4]
+})
+firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/appointment').update(keyvalue[1]);
+firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/'+key).update(keyvalue[1]);
+firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/'+key).update(keyvalue[0]);
+var newState1=[]
+newState1.push({
+    name:this.props.userdetails['name'],
+    mobilenumber:this.props.userdetails['mobilenumber'],
+    appt:t[4]
+});
+console.log(newState1)
+this.props.calls(newState1);
+
     }
     render() {
         //const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
@@ -281,7 +328,7 @@ class UserDetails extends React.Component {
         });
     }
         console.log(appt);
-        
+       console.log(f); 
         
        var i=0;
       /*  for (let i in this.props.userdetails['appointment']) {
@@ -348,6 +395,9 @@ class UserDetails extends React.Component {
                     </div>
                     <div  style={{height:this.state.dateheight,width:"90%",visibility:this.state.selectother}}>
                                 <DatePic/>
+                    </div>
+                    <div style={{height:this.state.butheight,width:"100%",marginTop:"2vh",visibility:this.state.butvis}} >
+                        <Button onClick={this.setNew.bind(this,appt[0])} style={{width:"30%",marginLeft:"35%",backgroundColor:"#D0DB4E"}} >CONFIRM</Button>
                     </div>
                     <div style={{ height: "7vh",textAlign:"left" }}><h2 style={{marginLeft:"5%",marginTop:"1vh"}} >फोटो</h2></div>
                     <div style={{width:"90%",marginLeft:"5%",backgroundColor:"grey",height:".2vh"}} ></div>

@@ -130,7 +130,7 @@ newstate.push({
                     </div>
                     <div style={{height:"100%",width:"80vw"}}>
                         <Paper elevation={3} style={{height:"98%",width:"99%",backgroundColor:"white",marginTop:"0.5%",marginLeft:"0.5%",overflowY:"scroll"}}>
-                            <UserDetails userdetails={this.state.userdetails} calls={this.calls}/>
+                            <UserDetails userdetails={this.state.userdetails} calls={this.calls} />
                         </Paper>
                     </div>
                 </div>

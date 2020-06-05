@@ -20,14 +20,62 @@ export default function DatePic(props) {
   const handleDateChange = (date) => {
       console.log(selectedDate)
     setSelectedDate(date);
-    
   };
  // const classes = useStyles();
   const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
       console.log(event.target.value)
-      time=event.target.value;
+      var time=event.target.value;
+      var sel=[];
+      document.cookie="date=;expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+      document.cookie="time=;expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+      //console.log(typeof(selectedDate));
+      //sel=selectedDate.split(" ");
+      var day="",month="",year="";
+      var dat=JSON.stringify(selectedDate);
+      console.log(typeof(dat));
+      console.log(dat);
+      sel=dat.split("-");     //for day and year
+      var y=[];
+      y=sel[0].split('"');
+      year=y[1];
+      month=sel[1];
+      var datf=[];
+      datf=sel[2].split("T");
+      day=datf[0];
+      console.log(datf[0]);
+      console.log(sel[1]);
+      /*var mo=parseInt(sel[1]);
+      mo+=1;
+      console.log(mo.toString());*/
+      if(day==="31")
+      {
+          day="1";
+          if(month==="12")
+          {
+             month="01";
+             year=(parseInt(year) + 1).toString();
+          }
+          else
+          {
+            month=(parseInt(month)+1).toString();
+            if(month.length===1)
+            {
+              month="0"+month;
+            }
+          }
+      }
+      else
+      {
+        day=(parseInt(day) + 1).toString();
+      }
+      var findat=month + "/" + day + "/" + year + " " + time;
+      console.log(findat);
+      
+      //findat=findat+sel[2] + "/" + sel[3] + " " + time;
+      document.cookie="ap=" + findat;
+      console.log(document.cookie);
     setAge(event.target.value);
     
   };
@@ -74,9 +122,6 @@ export default function DatePic(props) {
       </Select>
     </FormControl>
     </div>
-    <div style={{height:"6vh",width:"10vw",marginLeft:"10%"}}>
-        <button onClick={datetime} style={{height:"100%",width:"100%",backgroundColor:"#d0db4e",color:"white",border:"0px",marginTop:"1vh"}}>CONFIRM</button>
-          </div>
     </div>
   );
 }

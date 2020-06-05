@@ -104,7 +104,7 @@ newstate.push({
                 <LockOutlinedIcon />
                 </Avatar>
                 <Typography style={{marginLeft:"42%",marginTop:"2vh"}} component="h1" variant="h5">
-                Sign in
+                लॉग इन
                 </Typography>
                 </div>
                 <form className={classes.form} noValidate>
@@ -115,7 +115,7 @@ newstate.push({
                         required
                         //fullWidth
                         id="name"
-                        label="Name"
+                        label="नाव"
                         name="email"
                         autoComplete="name"
                         autoFocus
@@ -130,7 +130,7 @@ newstate.push({
                         required
                         name="number"
                         type="text"
-                        label="Mobile Number"
+                        label="मोबाइल नंबर"
                         id="number"
                         autoComplete="number"
                         style={{width:"20vw",marginLeft:"5vw"}}
@@ -143,7 +143,7 @@ newstate.push({
                         required
                         name="password"
                         type="password"
-                        label="Enter the password"
+                        label="पासवर्ड"
                         id="password"
                         autoComplete="password"
                         style={{width:"20vw",marginLeft:"5vw"}}
@@ -183,7 +183,7 @@ newstate.push({
                                 }                             
                                 }}
                         >
-                        <span>Login</span>
+                        <span>लॉग इन</span>
                         </Button>
                         <span id="err" style={{visibility:"hidden",textAlign:"center",marginLeft:"25%",width:"50%",color:"red",marginTop:"2vh"}} >Invalid credentials</span>
                    </div>
