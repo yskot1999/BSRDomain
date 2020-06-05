@@ -13,7 +13,8 @@ class Dashboardlayout extends React.Component{
           data:[],
           userdetails:[],
           callslist:[],
-          date:new Date().toLocaleDateString()
+          date:new Date().toLocaleDateString(),
+          domainnumber:""
         };
     };
     componentDidMount(){
@@ -43,6 +44,22 @@ class Dashboardlayout extends React.Component{
             }
         }
         })*/
+        var x=document.cookie;
+        console.log(x);
+        var t=[];
+        t=x.split(";");
+        console.log(t);
+        var tr=[];
+        tr=t[3].split(" ");
+        console.log(tr);
+        var user=[];
+        user=tr[1].split("=");
+        var mob=[];
+        mob=tr[2].split("=");
+        //var x=document.cookie;
+this.setState({
+domainnumber:mob[1]
+})
         const db=firebase.database().ref('/users');
         db.on('value',(snapshot)=>{
             const state=snapshot.val();
@@ -102,21 +119,7 @@ newstate.push({
 
     }
     render(){
-        var x=document.cookie;
-        console.log(x);
-        var t=[];
-        t=x.split(";");
-        console.log(t);
-        var tr=[];
-        tr=t[3].split(" ");
-        console.log(tr);
-        var user=[];
-        user=tr[1].split("=");
-        var mob=[];
-        mob=tr[2].split("=");
-        //var x=document.cookie;
-
-        console.log(mob[1]);
+        
         /*console.log(tr[1]);
         console.log(tr[2]);*/
         return(
@@ -130,7 +133,7 @@ newstate.push({
                     </div>
                     <div style={{height:"100%",width:"80vw"}}>
                         <Paper elevation={3} style={{height:"98%",width:"99%",backgroundColor:"white",marginTop:"0.5%",marginLeft:"0.5%",overflowY:"scroll"}}>
-                            <UserDetails userdetails={this.state.userdetails} calls={this.calls} />
+                            <UserDetails userdetails={this.state.userdetails} calls={this.calls} domainnumber={this.state.domainnumber} />
                         </Paper>
                     </div>
                 </div>

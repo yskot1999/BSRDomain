@@ -176,7 +176,7 @@ class UserDetails extends React.Component {
         var i=0,m=0;
         console.log(num)
         var n=num.split("/").join("-");
-       var db1=firebase.database().ref('/domainexpert/9867095775/calls');
+       var db1=firebase.database().ref('/domainexpert/'+this.props.domainnumber+'/calls');
        db1.on('value',(snapshot)=>{
            const state=snapshot.val();
            for(let i in state){
@@ -235,7 +235,7 @@ class UserDetails extends React.Component {
         })
     }
     setNew=(n)=>{
-        var x=document.cookie;
+        var x=document.cookie;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
         console.log(x);
         var t=[];
         t=x.split(";");
