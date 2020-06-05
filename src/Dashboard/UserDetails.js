@@ -273,7 +273,7 @@ newState1.push({
     appt:t[4]
 });
 console.log(newState1)
-alert("appointment booked")
+alert("अपॉइंटमेंट बुक केली आहे");
 this.props.calls(newState1);
 
 
@@ -347,6 +347,7 @@ this.props.calls(newState1);
         if (f === 1) {
             return (
                 <div style={{display:"flex",flexDirection:"column"}} >
+                    
                     <div style={{textAlign: "left", marginLeft: "5%", marginTop: "5%" }}>    <h1>{this.props.userdetails['name']}</h1>
                     </div>
                     <div style={{ marginLeft: "5%", marginTop: "-3%",display:"flex",flexDirection:"row",height:"6vh" }} >
@@ -440,8 +441,92 @@ this.props.calls(newState1);
                 </div>
             );
         }
-        else {
-            return (<div></div>);
+        else if(keys1.length===0){
+
+            return (<div style={{marginTop:"25%",textAlign:"center"}}><h1>Select a User</h1></div>);
+        }
+        else if(keys1.length!==0){
+            return (<div><div style={{display:"flex",flexDirection:"column"}} >
+          
+            <div style={{textAlign: "left", marginLeft: "5%", marginTop: "5%" }}>    <h1>{this.props.userdetails['name']}</h1>
+            </div>
+            <div style={{ marginLeft: "5%", marginTop: "-3%",display:"flex",flexDirection:"row",height:"6vh" }} >
+                <div style={{textAlign: "left",width:"30%"}} ><h2>{this.props.userdetails['mobilenumber']}</h2></div>
+             
+                <Button style={{marginLeft:"40%",width:"18%",height:"100%",backgroundColor:"#d0db4e",marginTop:"0%"}} onClick={() => {
+                    if(this.state.height==="0vh"){
+                        this.setState({
+                            height:"30vh",
+                            visibile:"visible"
+                        })
+                    }
+                    else{
+                        this.setState({
+                            height:"0vh",
+                            visibile:"hidden"
+                        })
+                    }      
+                }} >
+                <div style={{display:"flex",flexDirection:"row",width:"100%"}} >
+                <NotesIcon style={{height:"100%",marginTop:"12%"}} />
+                <p style={{marginLeft:"7%",height:"100%",fontSize:"17px"}}><b>नोट्स बनवा</b></p>
+                </div>
+                </Button>
+            </div>
+            <div style={{width:"90%",marginLeft:"5%",marginTop:"2%",backgroundColor:"grey",height:".2vh"}} ></div>
+           
+               
+            <div  style={{ height: "7vh", width: "70%", marginLeft: "15%", backgroundColor: "#3c403d", marginTop: "2%", display: "flex", flexDirection: "row", borderRadius: "20px",visibility:this.state.alertdisable }}>
+            <InfoOutlinedIcon style={{color:"white",marginLeft:"3%",marginTop:"1.5%"}}/> 
+            
+                <div style={{ width: "60%", textAlign: "left", marginLeft: "2%", marginTop: "2%", color: "white" }}>
+                सर्व अपॉइंटमेंट निश्चित केल्या आहेत</div>
+               
+            </div>
+          
+            <div id="tex" style={{width:"70%",marginLeft:"15%",marginTop:"5%",display:"flex",flexDirection:"column",height:this.state.height,visibility:this.state.visibile}} >
+                <textarea  id="notes" color="white" style={{width:"99%",height:"20vh",marginLeft:"0"}} ></textarea>    
+                <Button onClick={this.savenotes} style={{marginTop:"3.5vh",backgroundColor:"#D0DB4E",marginLeft:"37.5%",fontSize:"20px",width:"20%",height:"6vh"}}>सेव करा</Button>
+            </div>
+            <div  style={{height:this.state.dateheight,width:"90%",visibility:this.state.selectother}}>
+                        <DatePic/>
+            </div>
+            <div style={{height:this.state.butheight,width:"100%",marginTop:"2vh",visibility:this.state.butvis}} >
+                <Button onClick={this.setNew.bind(this,appt[0])} style={{width:"30%",marginLeft:"35%",backgroundColor:"#D0DB4E"}} >स्वीकारा आणि पुढे जा</Button>
+            </div>
+            <div style={{ height: "7vh",textAlign:"left" }}><h2 style={{marginLeft:"5%",marginTop:"1vh"}} >फोटो</h2></div>
+            <div style={{width:"90%",marginLeft:"5%",backgroundColor:"grey",height:".2vh"}} ></div>
+            <div style={{marginLeft:"9vw",marginTop:"10vh",width:"55vw" }} className={classes.root} >
+                <GridList   className={classes.gridList} cols={5}>  
+                    {this.state.imgdetails.map(tile => (
+                        console.log(tile),
+                        i=i+1,
+                        <GridListTile style={{marginLeft:"2vw",marginTop:"2.5vh",borderTopLeftRadius:"0vh",borderTopRightRadius:"0vh",borderBottomRightRadius:"2vh",borderBottomLeftRadius:"2vh"}} key={tile} >
+                            <img src={tile} alt={tile}/>
+                            <GridListTileBar
+                            title={i}
+                            classes={{
+                                root: classes.titleBar,
+                                title: classes.title,
+                            }}
+                            />
+                        </GridListTile>
+
+                    ))}
+                </GridList>
+            </div>
+            <div style={{ height: "10vh" }}></div>
+            <div style={{ height: "7vh",textAlign:"left" }}><h2 style={{marginLeft:"5%",marginTop:"1vh"}} >ऑडिओ रेकॉर्डिंग</h2></div>
+            <div style={{width:"90%",marginLeft:"5%",backgroundColor:"grey",height:".2vh"}} ></div>
+            <div style={{width:"40vw",marginLeft:"20vw",marginTop:"5vh"}} >
+                {this.state.audiodetails.map(tile => (
+                    <div style={{width:"20vw"}} >
+                        <audio style={{width:"20vw"}} src={tile} controls />
+                    </div>
+                ))}
+            </div>
+
+        </div></div>);
         }
     }
 
