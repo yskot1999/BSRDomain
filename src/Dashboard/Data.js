@@ -10,16 +10,16 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 
 const columns = [
-  { id: 'name', label: 'Name', minWidth: 220 },
+  { id: 'name', label: 'नाव', minWidth: 220 },
   {
     id: 'appt',
-    label: 'Appointment',
+    label: 'अपॉइंटमेंट',
     minWidth: 170,
     format: (value) => value.toLocaleString('en-US'),
   },
   {
     id: 'mobilenumber',
-    label: 'Mobile',
+    label: 'मोबाइल नंबर',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),

@@ -44,6 +44,7 @@ class UserDetails extends React.Component {
         this.noclicked=this.noclicked.bind(this);
         //this.change=this.change.bind(this);
         this.handleDateChange=this.handleDateChange.bind(this);
+        this.savenotes=this.savenotes.bind(this);
     }
    
     
@@ -165,6 +166,9 @@ class UserDetails extends React.Component {
         console.log(ret);
         
     }
+    savenotes(){
+        firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']).child("notes").set(document.getElementById("notes").value)
+    }
     addcalls=(num)=>{
        var key;
         var newState=[];
@@ -186,7 +190,7 @@ class UserDetails extends React.Component {
        setTimeout(()=>{
        console.log(m);
        if(m===1){
-        alert("appointment already exists.Select another time slot");
+        alert("त्यावेळी आपल्याकडे दुसरा कॉल आहे. दुसरा स्लॉट निवडा");
        }
        if(m===0){
 
@@ -213,7 +217,7 @@ class UserDetails extends React.Component {
             })
             console.log('/users/'+this.props.userdetails['mobilenumber']+'/'+key);
             firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/'+key).update(keyvalue[0]);
-            alert("appointment booked");
+            alert("अपॉइंटमेंट बुक केली आहे");
             this.setState({
                  alertdisable:"hidden",
                  alertdisable2:"visible"
@@ -253,14 +257,14 @@ key=i;
 var keyvalue=[];
 keyvalue.push({
   confirmation:"confirmed"  ,
-  timing:t[4]
+  
 })
 var timin=[];
 timin.push({
-    key:t[4]
+    timing:t[4]
 })
-firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/appointment').update(keyvalue[1]);
-firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/'+key).update(keyvalue[1]);
+firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/appointment').child(key).set(t[4]);
+firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/'+key).update(timin[0]);
 firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/'+key).update(keyvalue[0]);
 var newState1=[]
 newState1.push({
@@ -269,7 +273,9 @@ newState1.push({
     appt:t[4]
 });
 console.log(newState1)
+alert("appointment booked")
 this.props.calls(newState1);
+
 
     }
     render() {
@@ -361,8 +367,8 @@ this.props.calls(newState1);
                             }      
                         }} >
                         <div style={{display:"flex",flexDirection:"row",width:"100%"}} >
-                        <NotesIcon style={{height:"100%",marginTop:"12%",color:"white"}} />
-                        <p style={{marginLeft:"7%",height:"100%",fontSize:"17px",color:"white"}}><b>Make Notes</b></p>
+                        <NotesIcon style={{height:"100%",marginTop:"12%"}} />
+                        <p style={{marginLeft:"7%",height:"100%",fontSize:"17px"}}><b>नोट्स बनवा</b></p>
                         </div>
                         </Button>
                     </div>
@@ -390,14 +396,14 @@ this.props.calls(newState1);
                         
                     </div>
                     <div id="tex" style={{width:"70%",marginLeft:"15%",marginTop:"5%",display:"flex",flexDirection:"column",height:this.state.height,visibility:this.state.visibile}} >
-                        <textarea color="white" style={{width:"99%",height:"20vh",marginLeft:"0"}} ></textarea>    
-                        <Button style={{marginTop:"3.5vh",backgroundColor:"#D0DB4E",marginLeft:"37.5%",fontSize:"20px",width:"20%",height:"6vh",color:"white"}}>सेव करा</Button>
+                        <textarea  id="notes" color="white" style={{width:"99%",height:"20vh",marginLeft:"0"}} ></textarea>    
+                        <Button onClick={this.savenotes} style={{marginTop:"3.5vh",backgroundColor:"#D0DB4E",marginLeft:"37.5%",fontSize:"20px",width:"20%",height:"6vh"}}>सेव करा</Button>
                     </div>
                     <div  style={{height:this.state.dateheight,width:"90%",visibility:this.state.selectother}}>
                                 <DatePic/>
                     </div>
                     <div style={{height:this.state.butheight,width:"100%",marginTop:"2vh",visibility:this.state.butvis}} >
-                        <Button onClick={this.setNew.bind(this,appt[0])} style={{width:"30%",marginLeft:"35%",backgroundColor:"#D0DB4E"}} >CONFIRM</Button>
+                        <Button onClick={this.setNew.bind(this,appt[0])} style={{width:"30%",marginLeft:"35%",backgroundColor:"#D0DB4E"}} >स्वीकारा आणि पुढे जा</Button>
                     </div>
                     <div style={{ height: "7vh",textAlign:"left" }}><h2 style={{marginLeft:"5%",marginTop:"1vh"}} >फोटो</h2></div>
                     <div style={{width:"90%",marginLeft:"5%",backgroundColor:"grey",height:".2vh"}} ></div>

@@ -54,7 +54,7 @@ export default function MenuAppBar(props) {
           </IconButton>
          </Link>
           <Typography variant="h6" className={classes.title}>
-            NLP-KP
+          शेती विषयक तज्ञ सल्ला
           </Typography>
           {auth && (
             <div>
@@ -87,7 +87,7 @@ export default function MenuAppBar(props) {
                 open={open}
                 
               >
-             <Link to={{pathname:"/"}} style={{color:"black"}}>   <MenuItem>Logout</MenuItem></Link>
+             <Link to={{pathname:"/"}} style={{color:"black"}}>   <MenuItem>लॉग आउट</MenuItem></Link>
                 
               </Menu>
             </div>
