@@ -35,7 +35,7 @@ class CallDetails extends React.Component{
 
 createBucket().catch(console.error);*/
 console.log(this.state.date);
-var x=document.cookie;
+/*var x=document.cookie;
         console.log(x);
         var t=[];
         t=x.split(";");
@@ -47,12 +47,13 @@ var x=document.cookie;
         user=tr[1].split("=");
         var mob=[];
         mob=tr[2].split("=");
-        var approved="";
+        
         var actdate=[];
         var t=new Date().toLocaleDateString();
-        actdate=t.split("/");
+        actdate=t.split("/");*/
+        var approved="";
         var newstate=[];
-        var db=firebase.database().ref('/domainexpert/'+mob[1].toString()+'/calls');
+        var db=firebase.database().ref('/domainexpert/'+localStorage.getItem("mob")+'/calls');
         db.on('value',(snapshot)=>{
             approved=snapshot.numChildren();
             const state=snapshot.val();
@@ -108,7 +109,7 @@ var x=document.cookie;
         },3500)
     }
     render(){
-        var x=document.cookie;
+       /* var x=document.cookie;
         console.log(x);
         var t=[];
         t=x.split(";");
@@ -120,7 +121,7 @@ var x=document.cookie;
         user=tr[1].split("=");
         var mob=[];
         mob=tr[2].split("=");
-        console.log(this.props.location.state.name)
+        console.log(this.props.location.state.name)*/
         return(
             <div style={{height:"100vh",width:"100vw"}}>
                 <div style={{height:"10vh",width:"100vw"}}>
@@ -128,8 +129,8 @@ var x=document.cookie;
                 </div>
                 <div style={{height:"90vh",width:"100vw",display:"flex",flexDirection:"row"}}>
                     <Paper elevation={3} style={{height:"98%",width:"98%",marginTop:"1vh",marginLeft:"1vw",overflowY:"scroll"}}>
-                        <div style={{marginTop:"7%",marginLeft:"5%"}}><h1>{user[1].toString()}</h1></div>
-                        <div style={{marginTop:"-1%",marginLeft:"5%"}}><h3>{mob[1].toString()}</h3></div>
+                        <div style={{marginTop:"7%",marginLeft:"5%"}}><h1>{localStorage.getItem("username")}</h1></div>
+                        <div style={{marginTop:"-1%",marginLeft:"5%"}}><h3>{localStorage.getItem("mob")}</h3></div>
                         <div style={{marginTop:"0%",marginLeft:"5%",height:".2%",width:"90%",backgroundColor:"grey"}}></div>
                         <div style={{height:"10%",width:"90%",marginLeft:"5%",marginTop:"2%",display:"flex",flexDirection:"row"}}>
                             <div style={{height:"80%",width:"25%",borderWidth:"2px",borderStyle:"solid",borderColor:"#d0db4e",marginTop:"",marginLeft:"20%",borderRadius:"10px"}}><div style={{marginTop:"2vh",textAlign:"center"}}>प्रलंबित कॉल:{this.state.pendingcases}</div></div>

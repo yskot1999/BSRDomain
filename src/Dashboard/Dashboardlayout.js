@@ -53,7 +53,7 @@ class Dashboardlayout extends React.Component{
             }
         }
         })*/
-        var x=document.cookie;
+        /*var x=document.cookie;
         console.log(x);
         var t=[];
         t=x.split(";");
@@ -64,10 +64,10 @@ class Dashboardlayout extends React.Component{
         var user=[];
         user=tr[1].split("=");
         var mob=[];
-        mob=tr[2].split("=");
+        mob=tr[2].split("=");*/
         //var x=document.cookie;
 this.setState({
-domainnumber:mob[1]
+domainnumber:localStorage.getItem("mob")
 })
         const db=firebase.database().ref('/users');
         db.on('value',(snapshot)=>{
@@ -134,7 +134,7 @@ newstate.push({
         return(
             <div style={{height:"100vh",width:"100vw"}}>
                 <div style={{height:"10vh",width:"100vw"}}>
-                    <MenuAppBar name={this.props.location.state.name} mobilenumber={this.props.location.state.mobo}/>
+                    <MenuAppBar />
                 </div>
                 <div style={{height:"90vh",width:"100vw",display:"flex",flexDirection:"row"}}>
                     <div style={{height:"100%",width:"20vw",overflowY:"auto"}}>

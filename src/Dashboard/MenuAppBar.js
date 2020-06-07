@@ -48,7 +48,7 @@ export default function MenuAppBar(props) {
       
       <AppBar position="static" style={{backgroundColor:"#D0DB4E"}}>
         <Toolbar>
-        <Link to={{pathname:'/Dashboardlayout',state:{name:props.name,mobilenumber:props.mobilenumber}}} style={{color:"white"}}>
+        <Link to={{pathname:'/Dashboardlayout',state:{name:localStorage.getItem("username"),mobilenumber:localStorage.getItem("mob")}}} style={{color:"white"}}>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <DashboardIcon />
           </IconButton>
@@ -58,7 +58,7 @@ export default function MenuAppBar(props) {
           </Typography>
           {auth && (
             <div>
-              <Link to={{pathname:'/Dashboardlayout/CallDetails',state:{name:props.name,mobilenumber:props.mobilenumber}}} style={{color:"white"}}>
+              <Link to={{pathname:'/Dashboardlayout/CallDetails',state:{name:localStorage.getItem("username"),mobilenumber:localStorage.getItem("mob")}}} style={{color:"white"}}>
               <IconButton color="inherit" >
                 <Call/>
               </IconButton>

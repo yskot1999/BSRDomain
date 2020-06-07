@@ -444,7 +444,7 @@ alert("अपॉइंटमेंट बुक केली आहे");
                         
                     </div>
                     <div id="tex" style={{width:"70%",marginLeft:"15%",marginTop:"5%",display:"flex",flexDirection:"column",height:this.state.height,visibility:this.state.visibile}} >
-                        <Paper elevation={2} style={{width:"100%"}}>
+                        <Paper style={{width:"99%"}}>
                        <b> मागील नोट्स</b>
                             <Previous number={this.props.userdetails["mobilenumber"]}/>
                         </Paper>
@@ -523,7 +523,7 @@ alert("अपॉइंटमेंट बुक केली आहे");
             </div>
           
             <div id="tex" style={{width:"70%",marginLeft:"15%",marginTop:"5%",display:"flex",flexDirection:"column",height:this.state.height,visibility:this.state.visibile}} >
-            <Paper elevation={2} style={{width:"100%"}}> <b> मागील नोट्स</b> <Previous number={this.props.userdetails["mobilenumber"]}/></Paper>
+            <Paper style={{width:"99%"}}> <b> मागील नोट्स</b> <Previous number={this.props.userdetails["mobilenumber"]}/></Paper>
                 <textarea  id="notes" color="white" style={{width:"99%",height:"20vh",marginLeft:"0"}} ></textarea>    
                 <Button onClick={this.savenotes} style={{marginTop:"3.5vh",backgroundColor:"#D0DB4E",marginLeft:"37.5%",fontSize:"20px",width:"20%",height:"6vh"}}>सेव करा</Button>
             </div>

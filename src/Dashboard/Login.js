@@ -84,8 +84,10 @@ newstate.push({
         const classes = this.makeStyles;
         if(this.state.val)
         {
-            document.cookie="username=" + this.state.name.toString() +  " " +  "mob=" + this.state.mobo.toString();
-            return(
+           // document.cookie="username=" + this.state.name.toString() +  " " +  "mob=" + this.state.mobo.toString();
+           localStorage.setItem("username",this.state.name.toString());
+           localStorage.setItem("mob",this.state.mobo.toString()) ;
+           return(
                 <Redirect to={{pathname: "/Dashboardlayout", state: {name:this.state.name,mobo:this.state.mobo}}}/>
         )
         }
