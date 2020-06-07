@@ -59,28 +59,29 @@ var x=document.cookie;
             
             for(let i in state)
             {
-                var date=[];
+               /* var date=[];
                 date=state[i].appt.split(" ");
                 var day=[];
                 day=date[0].split("/");
                 console.log(day);
-                if(parseInt(day[2])>=parseInt(actdate[2]))
+               if(parseInt(day[2])>=parseInt(actdate[2]))
                 {
                     if(parseInt(day[0])>=parseInt(actdate[1]))
                     {
                         if(parseInt(day[1])>=parseInt(actdate[0]))
                         {
-                            newstate.push(
-                                {
-                                    id:i,
-                                    name:state[i].name,
-                                    mobo:state[i].mobilenumber,
-                                    appt:state[i].appt
-                                }
-                            )
+                           
                         }
                     }
-                }
+                }*/
+                newstate.push(
+                    {
+                        id:i,
+                        name:state[i].name,
+                        mobo:state[i].mobilenumber,
+                        appt:state[i].appt
+                    }
+                )
                 
             }
             
@@ -126,7 +127,7 @@ var x=document.cookie;
                     <MenuAppBar/>
                 </div>
                 <div style={{height:"90vh",width:"100vw",display:"flex",flexDirection:"row"}}>
-                    <Paper elevation={3} style={{height:"98%",width:"98%",marginTop:"1vh",marginLeft:"1vw"}}>
+                    <Paper elevation={3} style={{height:"98%",width:"98%",marginTop:"1vh",marginLeft:"1vw",overflowY:"scroll"}}>
                         <div style={{marginTop:"7%",marginLeft:"5%"}}><h1>{user[1].toString()}</h1></div>
                         <div style={{marginTop:"-1%",marginLeft:"5%"}}><h3>{mob[1].toString()}</h3></div>
                         <div style={{marginTop:"0%",marginLeft:"5%",height:".2%",width:"90%",backgroundColor:"grey"}}></div>
@@ -134,7 +135,7 @@ var x=document.cookie;
                             <div style={{height:"80%",width:"25%",borderWidth:"2px",borderStyle:"solid",borderColor:"#d0db4e",marginTop:"",marginLeft:"20%",borderRadius:"10px"}}><div style={{marginTop:"2vh",textAlign:"center"}}>प्रलंबित कॉल:{this.state.pendingcases}</div></div>
                             <div style={{height:"80%",width:"25%",borderWidth:"2px",borderStyle:"solid",borderColor:"#d0db4e",marginTop:"",marginLeft:"10%",borderRadius:"10px"}}><div style={{marginTop:"2vh",textAlign:"center"}}>स्वीकारलेले कॉल:{this.state.approvedcases}</div></div>
                         </div>
-                        <div style={{width:"60%",marginLeft:"20%"}} >
+                        <div style={{width:"60%",marginLeft:"20%",height:"40%"}} >
                         <Data result={this.state.data} />
                         </div>
                         </Paper>
