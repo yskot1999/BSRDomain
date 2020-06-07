@@ -235,7 +235,7 @@ class UserDetails extends React.Component {
             butvis:"visible"
         })
     }
-    setNew=(n)=>{
+    setNew= async(n)=>{
         var x=document.cookie;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
         console.log(x);
         var t=[];
@@ -245,6 +245,7 @@ class UserDetails extends React.Component {
         t[4]=t[4].substring(4,t[4].length)
         console.log(t[4]);
         var key=""
+        var fcmkey="";
 var db=firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/appointment');
 db.on('value',(snapshot)=>{
 const state=snapshot.val();
@@ -255,10 +256,14 @@ key=i;
 }
 
 })
+var d=firebase.database().ref('/users/' + this.props.userdetails['mobilenumber']);
+d.on('value',(snapshot)=>{
+    const state=snapshot.val();
+    fcmkey=state['fcmtoken'];
+})
 var keyvalue=[];
 keyvalue.push({
-  confirmation:"confirmed"  ,
-  
+  confirmation:"confirmed" 
 })
 var timin=[];
 timin.push({
@@ -274,9 +279,29 @@ newState1.push({
     appt:t[4]
 });
 console.log(newState1)
-axios.post("https://fcm.google.apis.com/fcm/send",g)
+const msg={
+	"to":fcmkey.toString(),
+	"data":{
+		"key1":"HEllo from server side",
+		"key2":"this is just dummy data"
+	},
+	"notification":{
+		"title":"आपल्या विनंतीवर प्रक्रिया केली गेली आहे",
+		"body":"अपॉइंटमेंटची वेळ " + t[4] +  " आहे"
+	}
+}
+
+await axios.post("https://fcm.googleapis.com/fcm/send",msg,{headers:{
+    "content-type":"application/json",
+    "Authorization":"key=AAAAgHYtPLI:APA91bEm6deMQjShR0YjlrTiud8LoF0pNKlHSlTotbvJC797jP_sjvEc8F8zLmjCEpOp5vIhJhvfDvHAtXII_ghCR1_38UFuGfnQK9Yf4PAUQVjg-9ishlWZUn-b0hBOfKLi6DWzWm3T"
+}}).then(response =>{
+    console.log("done");
+}).catch(err => {
+    console.log("error");
+})
 alert("अपॉइंटमेंट बुक केली आहे");
-this.props.calls(newState1);
+    this.props.calls(newState1);
+
 
 
     }
@@ -285,7 +310,11 @@ this.props.calls(newState1);
         const classes = this.makeStyles;
         console.log(this.state.imgdetails);
         console.log(this.state.audiodetails);
-        console.log(this.state.name1);
+
+
+
+
+
         console.log(this.state.mobilenum);
         /*this.state.imgdetails.map((tile)=>{
             console.log(tile)
