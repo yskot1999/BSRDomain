@@ -8,6 +8,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Button from '@material-ui/core/Button';
+import axios from 'axios'
 //import Paper from '@material-ui/core/Paper';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 //import Grid from '@material-ui/core/Grid';
@@ -273,6 +274,7 @@ newState1.push({
     appt:t[4]
 });
 console.log(newState1)
+axios.post("https://fcm.google.apis.com/fcm/send",g)
 alert("अपॉइंटमेंट बुक केली आहे");
 this.props.calls(newState1);
 
