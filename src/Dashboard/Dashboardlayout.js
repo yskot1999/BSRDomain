@@ -18,7 +18,16 @@ class Dashboardlayout extends React.Component{
         };
     };
     componentDidMount(){
-       
+    firebase.messaging().requestPermission().then(function(){
+        console.log("have permision");
+        return firebase.database().ref('/users/9527386206/fcmtoken');
+    })
+    .catch(function(err){
+        console.log(err)
+    })
+    firebase.messaging().onMessage(function(payload){
+        console.log(payload)
+    })
     /*    var db1=firebase.database().ref('/domainexpert/9867095775/calls');
         db1.on('value',(snapshot)=>{
             const s=snapshot.val();

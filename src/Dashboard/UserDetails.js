@@ -9,6 +9,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Button from '@material-ui/core/Button';
 import axios from 'axios'
+import Paper from '@material-ui/core/Paper';
 //import Paper from '@material-ui/core/Paper';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 //import Grid from '@material-ui/core/Grid';
@@ -21,7 +22,7 @@ import {
 import 'date-fns';
 import DatePic from './DatePic'
 
-
+import Previous from './Previous'
 class UserDetails extends React.Component {
     constructor(props) {
         super(props);
@@ -39,13 +40,15 @@ class UserDetails extends React.Component {
             selectother:"hidden",
             dateheight:"0vh",
             butheight:"0vh",
-            butvis:"hidden"
+            butvis:"hidden",
+            previousnotes:[]
         }
         this.addcalls=this.addcalls.bind(this);
         this.noclicked=this.noclicked.bind(this);
         //this.change=this.change.bind(this);
         this.handleDateChange=this.handleDateChange.bind(this);
         this.savenotes=this.savenotes.bind(this);
+        this.saved=this.saved.bind(this);
     }
    
     
@@ -168,8 +171,18 @@ class UserDetails extends React.Component {
         
     }
     savenotes(){
-        firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']).child("notes").set(document.getElementById("notes").value)
-    }
+        var k=0;
+        var note="";
+        var str=[];
+        if(document.getElementById("notes").value!==""){
+        str.push({
+            timestamp:new Date().toLocaleDateString()+" "+new Date().toLocaleTimeString(),
+            note:document.getElementById("notes").value
+        })
+        firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+"/notes/"+new Date().toLocaleTimeString()).set(str[0])
+        
+        document.getElementById("notes").value=""}
+        }
     addcalls=(num)=>{
        var key;
         var newState=[];
@@ -305,6 +318,22 @@ alert("अपॉइंटमेंट बुक केली आहे");
 
 
     }
+    saved() {
+          
+          if(this.state.height==="0vh"){
+              this.setState({
+                  height:"50vh",
+                  visibile:"visible",
+                  
+              })
+          }
+          else{
+              this.setState({
+                  height:"0vh",
+                  visibile:"hidden"
+              })
+          }             
+   }
     render() {
         //const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
         const classes = this.makeStyles;
@@ -384,20 +413,7 @@ alert("अपॉइंटमेंट बुक केली आहे");
                     <div style={{ marginLeft: "5%", marginTop: "-3%",display:"flex",flexDirection:"row",height:"6vh" }} >
                         <div style={{textAlign: "left",width:"30%"}} ><h2>{this.props.userdetails['mobilenumber']}</h2></div>
                      
-                        <Button style={{marginLeft:"40%",width:"18%",height:"100%",backgroundColor:"#d0db4e",marginTop:"0%"}} onClick={() => {
-                            if(this.state.height==="0vh"){
-                                this.setState({
-                                    height:"30vh",
-                                    visibile:"visible"
-                                })
-                            }
-                            else{
-                                this.setState({
-                                    height:"0vh",
-                                    visibile:"hidden"
-                                })
-                            }      
-                        }} >
+                        <Button style={{marginLeft:"40%",width:"18%",height:"100%",backgroundColor:"#d0db4e",marginTop:"0%"}} onClick={this.saved} >
                         <div style={{display:"flex",flexDirection:"row",width:"100%"}} >
                         <NotesIcon style={{height:"100%",marginTop:"12%"}} />
                         <p style={{marginLeft:"7%",height:"100%",fontSize:"17px"}}><b>नोट्स बनवा</b></p>
@@ -428,6 +444,10 @@ alert("अपॉइंटमेंट बुक केली आहे");
                         
                     </div>
                     <div id="tex" style={{width:"70%",marginLeft:"15%",marginTop:"5%",display:"flex",flexDirection:"column",height:this.state.height,visibility:this.state.visibile}} >
+                        <Paper elevation={2} style={{width:"100%"}}>
+                       <b> मागील नोट्स</b>
+                            <Previous number={this.props.userdetails["mobilenumber"]}/>
+                        </Paper>
                         <textarea  id="notes" color="white" style={{width:"99%",height:"20vh",marginLeft:"0"}} ></textarea>    
                         <Button onClick={this.savenotes} style={{marginTop:"3.5vh",backgroundColor:"#D0DB4E",marginLeft:"37.5%",fontSize:"20px",width:"20%",height:"6vh"}}>सेव करा</Button>
                     </div>
@@ -445,7 +465,7 @@ alert("अपॉइंटमेंट बुक केली आहे");
                                 console.log(tile),
                                 i=i+1,
                                 <GridListTile style={{marginLeft:"2vw",marginTop:"2.5vh",borderTopLeftRadius:"0vh",borderTopRightRadius:"0vh",borderBottomRightRadius:"2vh",borderBottomLeftRadius:"2vh"}} key={tile} >
-                                    <img src={tile} alt={tile}/>
+                                  <a href={tile} target="_blank"> <img src={tile} alt={tile}/></a>
                                     <GridListTileBar
                                     title={i}
                                     classes={{
@@ -484,20 +504,7 @@ alert("अपॉइंटमेंट बुक केली आहे");
             <div style={{ marginLeft: "5%", marginTop: "-3%",display:"flex",flexDirection:"row",height:"6vh" }} >
                 <div style={{textAlign: "left",width:"30%"}} ><h2>{this.props.userdetails['mobilenumber']}</h2></div>
              
-                <Button style={{marginLeft:"40%",width:"18%",height:"100%",backgroundColor:"#d0db4e",marginTop:"0%"}} onClick={() => {
-                    if(this.state.height==="0vh"){
-                        this.setState({
-                            height:"30vh",
-                            visibile:"visible"
-                        })
-                    }
-                    else{
-                        this.setState({
-                            height:"0vh",
-                            visibile:"hidden"
-                        })
-                    }      
-                }} >
+                <Button style={{marginLeft:"40%",width:"18%",height:"100%",backgroundColor:"#d0db4e",marginTop:"0%"}} onClick={this.saved} >
                 <div style={{display:"flex",flexDirection:"row",width:"100%"}} >
                 <NotesIcon style={{height:"100%",marginTop:"12%"}} />
                 <p style={{marginLeft:"7%",height:"100%",fontSize:"17px"}}><b>नोट्स बनवा</b></p>
@@ -516,6 +523,7 @@ alert("अपॉइंटमेंट बुक केली आहे");
             </div>
           
             <div id="tex" style={{width:"70%",marginLeft:"15%",marginTop:"5%",display:"flex",flexDirection:"column",height:this.state.height,visibility:this.state.visibile}} >
+            <Paper elevation={2} style={{width:"100%"}}> <b> मागील नोट्स</b> <Previous number={this.props.userdetails["mobilenumber"]}/></Paper>
                 <textarea  id="notes" color="white" style={{width:"99%",height:"20vh",marginLeft:"0"}} ></textarea>    
                 <Button onClick={this.savenotes} style={{marginTop:"3.5vh",backgroundColor:"#D0DB4E",marginLeft:"37.5%",fontSize:"20px",width:"20%",height:"6vh"}}>सेव करा</Button>
             </div>
@@ -528,12 +536,13 @@ alert("अपॉइंटमेंट बुक केली आहे");
             <div style={{ height: "7vh",textAlign:"left" }}><h2 style={{marginLeft:"5%",marginTop:"1vh"}} >फोटो</h2></div>
             <div style={{width:"90%",marginLeft:"5%",backgroundColor:"grey",height:".2vh"}} ></div>
             <div style={{marginLeft:"9vw",marginTop:"10vh",width:"55vw" }} className={classes.root} >
+               
                 <GridList   className={classes.gridList} cols={5}>  
                     {this.state.imgdetails.map(tile => (
                         console.log(tile),
                         i=i+1,
                         <GridListTile style={{marginLeft:"2vw",marginTop:"2.5vh",borderTopLeftRadius:"0vh",borderTopRightRadius:"0vh",borderBottomRightRadius:"2vh",borderBottomLeftRadius:"2vh"}} key={tile} >
-                            <img src={tile} alt={tile}/>
+                            <a href={tile} target="_blank"> <img src={tile} alt={tile}/></a>
                             <GridListTileBar
                             title={i}
                             classes={{
