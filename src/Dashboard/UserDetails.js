@@ -292,6 +292,12 @@ newState1.push({
     mobilenumber:this.props.userdetails['mobilenumber'],
     appt:t
 });
+
+this.setState({
+    selectother:"hidden",
+    dateheight:"0vh",
+    butheight:"0vh"
+})
 console.log(newState1)
 const msg={
 	"to":fcmkey.toString(),
@@ -444,11 +450,11 @@ alert("अपॉइंटमेंट बुक केली आहे");
                          {appt[0]}ला अपॉईंटमेंट् निश्चित केली आहे</div>
                         
                     </div>
-                    <div  style={{height:this.state.dateheight,width:"90%",visibility:this.state.selectother}}>
+                    <div  style={{height:this.state.dateheight,width:"90%",visibility:this.state.selectother,marginTop:"3%"}}>
                                 <DatePic/>
                     </div>
-                    <div style={{height:this.state.butheight,width:"100%",marginTop:"2vh",visibility:this.state.butvis}} >
-                        <Button onClick={this.setNew.bind(this,appt[0])} style={{width:"30%",marginLeft:"35%",backgroundColor:"#D0DB4E"}} >स्वीकारा आणि पुढे जा</Button>
+                    <div style={{height:this.state.butheight,width:"100%",marginTop:"2vh",visibility:this.state.selectother}} >
+                        <Button id="save" onClick={this.setNew.bind(this,appt[0])} style={{width:"30%",marginLeft:"35%",backgroundColor:"#D0DB4E"}} >स्वीकारा आणि पुढे जा</Button>
                     </div>
                     <div id="tex" style={{width:"70%",marginLeft:"15%",marginTop:"5%",display:"flex",flexDirection:"column",height:this.state.height,visibility:this.state.visibile}} >
                         <Paper style={{width:"99%"}}>
@@ -523,10 +529,10 @@ alert("अपॉइंटमेंट बुक केली आहे");
                 सर्व अपॉइंटमेंट निश्चित केल्या आहेत</div>
                
             </div>
-            <div  style={{height:this.state.dateheight,width:"90%",visibility:this.state.selectother}}>
+            <div  style={{height:this.state.dateheight,width:"90%",visibility:this.state.selectother,marginTop:"3%"}}>
                         <DatePic/>
             </div>
-            <div style={{height:this.state.butheight,width:"100%",marginTop:"2vh",visibility:this.state.butvis}} >
+            <div style={{height:this.state.butheight,width:"100%",marginTop:"2vh",visibility:this.state.selectother}} >
                 <Button onClick={this.setNew.bind(this,appt[0])} style={{width:"30%",marginLeft:"35%",backgroundColor:"#D0DB4E"}} >स्वीकारा आणि पुढे जा</Button>
             </div>
             <div id="tex" style={{width:"70%",marginLeft:"15%",marginTop:"5%",display:"flex",flexDirection:"column",height:this.state.height,visibility:this.state.visibile}} >
