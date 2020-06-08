@@ -121,7 +121,7 @@ newstate.push({
       var mob=[];
       mob=tr[2].split("=");
       var d=obj[0].appt.split("/").join("-");
-      firebase.database().ref('/domainexpert/'+mob[1].toString()+'/calls/'+d).set(obj[0]);
+      firebase.database().ref('/domainexpert/'+this.state.domainnumber+'/calls/'+d).set(obj[0]);
       
        //console.log(this.state.added)
       

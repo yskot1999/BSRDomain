@@ -74,8 +74,9 @@ export default function DatePic(props) {
       console.log(findat);
       
       //findat=findat+sel[2] + "/" + sel[3] + " " + time;
-      document.cookie="ap=" + findat;
-      console.log(document.cookie);
+    //  document.cookie="ap=" + findat;
+      //console.log(document.cookie);
+      localStorage.setItem("changedappt",findat);
     setAge(event.target.value);
     
   };

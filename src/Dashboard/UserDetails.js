@@ -249,14 +249,15 @@ class UserDetails extends React.Component {
         })
     }
     setNew= async(n)=>{
-        var x=document.cookie;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+       /* var x=document.cookie;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
         console.log(x);
         var t=[];
         t=x.split(";");
         console.log(t);
         console.log(t[4]);
         t[4]=t[4].substring(4,t[4].length)
-        console.log(t[4]);
+        console.log(t[4]);*/
+        var t=localStorage.getItem("changedappt")
         var key=""
         var fcmkey="";
 var db=firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/appointment');
@@ -280,16 +281,16 @@ keyvalue.push({
 })
 var timin=[];
 timin.push({
-    timing:t[4]
+    timing:t
 })
-firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/appointment').child(key).set(t[4]);
+firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/appointment').child(key).set(t);
 firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/'+key).update(timin[0]);
 firebase.database().ref('/users/'+this.props.userdetails['mobilenumber']+'/'+key).update(keyvalue[0]);
 var newState1=[]
 newState1.push({
     name:this.props.userdetails['name'],
     mobilenumber:this.props.userdetails['mobilenumber'],
-    appt:t[4]
+    appt:t
 });
 console.log(newState1)
 const msg={
@@ -300,7 +301,7 @@ const msg={
 	},
 	"notification":{
 		"title":"आपल्या विनंतीवर प्रक्रिया केली गेली आहे",
-		"body":"अपॉइंटमेंटची वेळ " + t[4] +  " आहे"
+		"body":"अपॉइंटमेंटची वेळ " + t+  " आहे"
 	}
 }
 
@@ -443,6 +444,12 @@ alert("अपॉइंटमेंट बुक केली आहे");
                          {appt[0]}ला अपॉईंटमेंट् निश्चित केली आहे</div>
                         
                     </div>
+                    <div  style={{height:this.state.dateheight,width:"90%",visibility:this.state.selectother}}>
+                                <DatePic/>
+                    </div>
+                    <div style={{height:this.state.butheight,width:"100%",marginTop:"2vh",visibility:this.state.butvis}} >
+                        <Button onClick={this.setNew.bind(this,appt[0])} style={{width:"30%",marginLeft:"35%",backgroundColor:"#D0DB4E"}} >स्वीकारा आणि पुढे जा</Button>
+                    </div>
                     <div id="tex" style={{width:"70%",marginLeft:"15%",marginTop:"5%",display:"flex",flexDirection:"column",height:this.state.height,visibility:this.state.visibile}} >
                         <Paper style={{width:"99%"}}>
                        <b> मागील नोट्स</b>
@@ -451,12 +458,7 @@ alert("अपॉइंटमेंट बुक केली आहे");
                         <textarea  id="notes" color="white" style={{width:"99%",height:"20vh",marginLeft:"0"}} ></textarea>    
                         <Button onClick={this.savenotes} style={{marginTop:"3.5vh",backgroundColor:"#D0DB4E",marginLeft:"37.5%",fontSize:"20px",width:"20%",height:"6vh"}}>सेव करा</Button>
                     </div>
-                    <div  style={{height:this.state.dateheight,width:"90%",visibility:this.state.selectother}}>
-                                <DatePic/>
-                    </div>
-                    <div style={{height:this.state.butheight,width:"100%",marginTop:"2vh",visibility:this.state.butvis}} >
-                        <Button onClick={this.setNew.bind(this,appt[0])} style={{width:"30%",marginLeft:"35%",backgroundColor:"#D0DB4E"}} >स्वीकारा आणि पुढे जा</Button>
-                    </div>
+                  
                     <div style={{ height: "7vh",textAlign:"left" }}><h2 style={{marginLeft:"5%",marginTop:"1vh"}} >फोटो</h2></div>
                     <div style={{width:"90%",marginLeft:"5%",backgroundColor:"grey",height:".2vh"}} ></div>
                     <div style={{marginLeft:"9vw",marginTop:"10vh",width:"55vw" }} className={classes.root} >
@@ -521,18 +523,18 @@ alert("अपॉइंटमेंट बुक केली आहे");
                 सर्व अपॉइंटमेंट निश्चित केल्या आहेत</div>
                
             </div>
-          
-            <div id="tex" style={{width:"70%",marginLeft:"15%",marginTop:"5%",display:"flex",flexDirection:"column",height:this.state.height,visibility:this.state.visibile}} >
-            <Paper style={{width:"99%"}}> <b> मागील नोट्स</b> <Previous number={this.props.userdetails["mobilenumber"]}/></Paper>
-                <textarea  id="notes" color="white" style={{width:"99%",height:"20vh",marginLeft:"0"}} ></textarea>    
-                <Button onClick={this.savenotes} style={{marginTop:"3.5vh",backgroundColor:"#D0DB4E",marginLeft:"37.5%",fontSize:"20px",width:"20%",height:"6vh"}}>सेव करा</Button>
-            </div>
             <div  style={{height:this.state.dateheight,width:"90%",visibility:this.state.selectother}}>
                         <DatePic/>
             </div>
             <div style={{height:this.state.butheight,width:"100%",marginTop:"2vh",visibility:this.state.butvis}} >
                 <Button onClick={this.setNew.bind(this,appt[0])} style={{width:"30%",marginLeft:"35%",backgroundColor:"#D0DB4E"}} >स्वीकारा आणि पुढे जा</Button>
             </div>
+            <div id="tex" style={{width:"70%",marginLeft:"15%",marginTop:"5%",display:"flex",flexDirection:"column",height:this.state.height,visibility:this.state.visibile}} >
+            <Paper style={{width:"99%"}}> <b> मागील नोट्स</b> <Previous number={this.props.userdetails["mobilenumber"]}/></Paper>
+                <textarea  id="notes" color="white" style={{width:"99%",height:"20vh",marginLeft:"0"}} ></textarea>    
+                <Button onClick={this.savenotes} style={{marginTop:"3.5vh",backgroundColor:"#D0DB4E",marginLeft:"37.5%",fontSize:"20px",width:"20%",height:"6vh"}}>सेव करा</Button>
+            </div>
+            
             <div style={{ height: "7vh",textAlign:"left" }}><h2 style={{marginLeft:"5%",marginTop:"1vh"}} >फोटो</h2></div>
             <div style={{width:"90%",marginLeft:"5%",backgroundColor:"grey",height:".2vh"}} ></div>
             <div style={{marginLeft:"9vw",marginTop:"10vh",width:"55vw" }} className={classes.root} >
