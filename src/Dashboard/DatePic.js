@@ -28,8 +28,8 @@ export default function DatePic(props) {
       console.log(event.target.value)
       var time=event.target.value;
       var sel=[];
-      document.cookie="date=;expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-      document.cookie="time=;expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+      //document.cookie="date=;expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+      //document.cookie="time=;expires=Thu, 01 Jan 1970 00:00:00 UTC;";
       //console.log(typeof(selectedDate));
       //sel=selectedDate.split(" ");
       var day="",month="",year="";

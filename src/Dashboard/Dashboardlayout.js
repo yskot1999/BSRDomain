@@ -108,7 +108,7 @@ newstate.push({
       //  const narr = [...this.state.callslist]
        // this.state.added.push(item)
       // narr.push(obj)
-      var x=document.cookie;
+     /* var x=document.cookie;
       console.log(x);
       var t=[];
       t=x.split(";");
@@ -119,7 +119,7 @@ newstate.push({
       var user=[];
       user=tr[1].split("=");
       var mob=[];
-      mob=tr[2].split("=");
+      mob=tr[2].split("=");*/
       var d=obj[0].appt.split("/").join("-");
       firebase.database().ref('/domainexpert/'+this.state.domainnumber+'/calls/'+d).set(obj[0]);
       
